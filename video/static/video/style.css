@@ -25,3 +25,66 @@ body {
     width: 50px;
 }
 
+.form-container {
+    padding: 20px;
+    width: 300px;
+    background-color:white;
+    margin: 50px auto;
+    border-radius: 10px;
+}
+
+form, form input {
+    width: 100%;
+}
+
+form input {
+    padding: 5px;
+    margin: 3px 0 10px 0;
+}
+
+.helptext {
+    display: none;
+}
+
+.actions {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions input {
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
+.actions .submit {
+    background: #0c2044;
+    cursor: pointer;
+}
+
+.actions .reset {
+    background: darkred;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+p {
+    font-size: 12px;
+}
+
+.error {
+    color: darkred;
+    font-size: 14px;
+    text-align: center;
+}
+
+.errorlist{
+    color: darkred;
+    font-size: 14px;
+    text-align: center;
+    list-style: none;
+}
+
+
