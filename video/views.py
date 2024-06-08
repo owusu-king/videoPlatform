@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+# Video page, denoting the index view
+def index(request): 
+    return render(request, 'video/index.html',)

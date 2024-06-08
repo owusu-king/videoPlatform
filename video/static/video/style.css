@@ -1,0 +1,23 @@
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma;
+}
+
+body {
+    background-color: #ccc;
+}
+
+#header {
+    background-color:  #0c2044;
+    align-items: center;
+    padding: 10px 40px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+

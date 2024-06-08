@@ -1,0 +1,36 @@
+{% load static %}
+<!-- This is a layout for the video app, contains a header logo, and if logged in, Greet user -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'video/style.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>{% block title %} {% endblock %}</title>
+    </head>
+    <body>
+        <header id="header">
+            <img src="" alt="logo" class="logo">
+            <div class="user">
+            </div>
+        </header>
+    <!-- END OF HEADER BAR  -->
+
+    <!-- BEGIN MAIN CONTENT  -->
+    <main id="main">
+        <!-- Make a block space for other HTML files that extends this layout  -->
+        {% block main %} 
+        {% endblock %}
+    </main>
+    <!-- END OF MAIN CONTENT  -->
+
+    <!-- BEGIN FOOTER  -->
+    <footer id="footer">
+        <div></div>
+    </footer>
+    <!-- END OF FOOTER  -->
+
+</body>
+</html>
