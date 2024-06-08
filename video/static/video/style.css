@@ -33,8 +33,13 @@ body {
     border-radius: 10px;
 }
 
-form, form input {
+form, form input, textarea {
     width: 100%;
+}
+
+textarea {
+    max-width: 260;
+    resize: none;
 }
 
 form input {
@@ -85,6 +90,26 @@ p {
     font-size: 14px;
     text-align: center;
     list-style: none;
+}
+
+.admin-main {
+    margin: 0 auto;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-areas: 'feed form-container';
+    padding-left: 20px;
+    padding-right: 20px;
+    grid-gap: 100px;
+}
+
+.feed {
+    grid-area: feed;
+    width: 100%;
+}
+
+.upload-video {
+    grid-area: upload-video;
 }
 
 

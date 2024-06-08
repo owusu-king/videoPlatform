@@ -1,4 +1,5 @@
 from django import forms
+from .models import VideoDetails
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -18,3 +19,9 @@ class UserCreationForm(UserCreationForm):
             'type': 'email',  # Change input type here
             'class': 'form-control',  # Optional: add any CSS classes here
         })
+
+# A form for the controller user to upload video
+class VideoUploadForm(forms.ModelForm):
+    class Meta:
+        model = VideoDetails
+        fields = ['title', 'description', 'video_file']

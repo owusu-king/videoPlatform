@@ -1,0 +1,28 @@
+{% extends 'video/layout.html' %}
+
+{% block title %} 
+  Dashboard | Video Platform
+{% endblock %}
+
+{% block main %}
+    <section class="admin-main">
+    
+    <div class="form-container feed">
+        <h1 style="font-size: 20px; text-align: center; margin-bottom: 20px;"> Logs </h1>
+    </div>
+    
+
+    <div class="form-container Upload-video">
+        <h1 style="font-size: 20px; text-align: center; margin-bottom: 20px;"> Video Upload </h1>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{video_form.as_p}}
+            <div class="actions">
+                <input type="reset" value="Clear" class="reset">
+                <input type="submit" value="Upload" class="submit">   
+              </div>
+        </form>
+    </div>
+
+</section>
+{% endblock %}

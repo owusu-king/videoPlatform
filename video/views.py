@@ -1,19 +1,41 @@
 from django.shortcuts import render
-from .forms import UserCreationForm
+from .forms import UserCreationForm, VideoUploadForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 
 
+# Dashboard view for Admin to upload videos
+def dashboard_view(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('login'))
+    if not request.user.groups.filter(name='Controller').exists():
+        return HttpResponseRedirect(reverse('index'))         
+    if request.method == 'POST': # If admin uploads a new video
+        form = VideoUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        else:
+            return render(request, 'video/dashboard.html', {'video_form': form})        
+    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm()})
+
+
 # Video page, denoting the index view
-def index(request): 
+def index(request):
+    if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
+        return HttpResponseRedirect(reverse('login'))
+    else:
+        if request.user.groups.filter(name='Controller').exists():
+            return HttpResponseRedirect(reverse('dashboard')) 
     return render(request, 'video/index.html',)
 
 
 
 # ACCOUNT CREATION, LOGIN AND LOGOUT VIEWS
 # Signup View, for user registration.
-def signup_view(request): 
+def signup_view(request):
+    if request.user.is_authenticated: # If users are already authenticated, deny this page
+        return HttpResponseRedirect(reverse('index'))
     if request.method == 'POST':
         # when the request method of this view is a POST, then get the form object and save the fields to the db
         form = UserCreationForm(request.POST)
@@ -26,6 +48,8 @@ def signup_view(request):
 
 # Login View, for user login action
 def login_view(request):
+    if request.user.is_authenticated: # If users are already authenticated, deny this page
+        return HttpResponseRedirect(reverse('index'))
     if request.method == 'POST':
         # if the request method is POST, get the form fields and authenticate the user
         username = request.POST['username']
