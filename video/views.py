@@ -5,6 +5,16 @@ from .models import VideoDetails
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 
+# ACCOUNT VERIFICATION AND PASSWORD RESET MODULES
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth.tokens import default_token_generator
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 
 def first_video(request):
     if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
