@@ -16,6 +16,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 
+
 def first_video(request):
     if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
         return HttpResponseRedirect(reverse('login'))
@@ -67,17 +68,55 @@ def index(request, id): # Pass a video id to display a particular video
 
 # ACCOUNT CREATION, LOGIN AND LOGOUT VIEWS
 # Signup View, for user registration.
-def signup_view(request):
+def signup_view(request): 
     if request.user.is_authenticated: # If users are already authenticated, deny this page
-        return HttpResponseRedirect(reverse('index'))
+        if VideoDetails.objects.first():
+            return HttpResponseRedirect(reverse('index', args=[VideoDetails.objects.first().id]))
+        else:
+            return HttpResponseRedirect(reverse('first'))  
     if request.method == 'POST':
         # when the request method of this view is a POST, then get the form object and save the fields to the db
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            user = form.save(commit=False) # Do not commit user details to db yes, lets wait for activation
+            user.is_active = False # Set user inactive and save the record
             form.save()
+
+            # do verification
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            current_site = get_current_site(request)
+            mail_subject = 'Confirm Account Activation'
+            message = render_to_string('video/verification/activate_email_info.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': uid,
+                'token': token,
+            })
+            send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [user.username])
+            return render(request, 'video/verification/verification_confirm.html')
+
+            # logout(request) # Stop taking users to the video page after signup,
+            # return HttpResponseRedirect(reverse('login')) # Take them to login rather
         else:
             return render(request, 'video/signup.html', {'signup':form}) # if form has errors, then show the errors with the form again  
     return render(request, 'video/signup.html', {'signup':UserCreationForm()}) # if request method is GET, provide a new sign up form
+
+# Activation View,
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))  # 
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        return render(request, 'video/verification/activation_complete.html')
+    else:
+        return render(request, 'video/verification/activation_invalid.html')
+
 
 
 # Login View, for user login action

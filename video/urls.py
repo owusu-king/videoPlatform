@@ -9,4 +9,8 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('dashboard/', views.dashboard_view, name="dashboard"),
+
+    # Account verification view
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
+
 ]
