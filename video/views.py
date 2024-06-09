@@ -1,33 +1,57 @@
 from django.shortcuts import render
 from .forms import UserCreationForm, VideoUploadForm
 from django.urls import reverse
+from .models import VideoDetails
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
+
+
+def first_video(request):
+    if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
+        return HttpResponseRedirect(reverse('login'))
+    else:
+        if request.user.groups.filter(name='Controller').exists():
+            return HttpResponseRedirect(reverse('dashboard'))
+    first_video = VideoDetails.objects.order_by('pk').first()
+    if first_video:
+        return HttpResponseRedirect(reverse('index', args=[first_video.pk]))
+    else:
+        return render(request, 'video/no_video.html')   
+
 
 
 # Dashboard view for Admin to upload videos
 def dashboard_view(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('login'))
-    if not request.user.groups.filter(name='Controller').exists():
-        return HttpResponseRedirect(reverse('index'))         
-    if request.method == 'POST': # If admin uploads a new video
-        form = VideoUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-        else:
-            return render(request, 'video/dashboard.html', {'video_form': form})        
+    else:
+        if not request.user.groups.filter(name='Controller').exists():
+            if VideoDetails.objects.first():
+                return HttpResponseRedirect(reverse('index', args=[VideoDetails.objects.first().id]))
+            else:
+                return HttpResponseRedirect(reverse('first'))  
+        if request.method == 'POST': # If admin uploads a new video
+            form = VideoUploadForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+            else:
+                return render(request, 'video/dashboard.html', {'video_form': form})        
     return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm()})
 
 
 # Video page, denoting the index view
-def index(request):
+def index(request, id): # Pass a video id to display a particular video
     if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
         return HttpResponseRedirect(reverse('login'))
     else:
         if request.user.groups.filter(name='Controller').exists():
-            return HttpResponseRedirect(reverse('dashboard')) 
-    return render(request, 'video/index.html',)
+            return HttpResponseRedirect(reverse('dashboard'))
+    video = VideoDetails.objects.get(id=id)
+
+    next_video = VideoDetails.objects.filter(pk__gt=video.pk).order_by('pk').first()
+    previous_video = VideoDetails.objects.filter(pk__lt=video.pk).order_by('-pk').first()
+
+    return render(request, 'video/index.html', {'video' : video, 'next': next_video, 'prev': previous_video}) # Otherwise, give them the index page.
 
 
 
@@ -49,7 +73,11 @@ def signup_view(request):
 # Login View, for user login action
 def login_view(request):
     if request.user.is_authenticated: # If users are already authenticated, deny this page
-        return HttpResponseRedirect(reverse('index'))
+        if VideoDetails.objects.first():
+            return HttpResponseRedirect(reverse('index', args=[VideoDetails.objects.first().id]))
+        else:
+            return HttpResponseRedirect(reverse('first'))
+
     if request.method == 'POST':
         # if the request method is POST, get the form fields and authenticate the user
         username = request.POST['username']
@@ -57,6 +85,10 @@ def login_view(request):
         user = authenticate(request, username=username, password = password) # authenticate with django's default authenticate module
         if user is not None:
             login(request, user)
+            if VideoDetails.objects.first():
+                return HttpResponseRedirect(reverse('index', args=[VideoDetails.objects.first().id]))
+            else:
+                return HttpResponseRedirect(reverse('first'))
         else:
             return render(request, 'video/login.html', {'message':"Invalid Credentials"}) # If authentication, fails, display login page again, with error message
 

@@ -4,3 +4,41 @@
 {% block title %} 
     Home | Video Platform 
 {% endblock %}
+
+{% block main %}
+    {% if video %}
+    <div class="video-container">
+            {% if prev %}
+                <a class="nav-btn" href="{% url 'index' id=prev.pk %}">Prev</a>
+            {% else %}
+                <div class="nav-btn-inactive">
+
+                </div>
+            {% endif %}
+        
+        <video controls autoplay preload>
+            <source src="{{ video.video_file.url }}" type="video/mp4">
+        </video>
+        
+            {% if next %}
+                <a class="nav-btn" href="{% url 'index' id=next.pk %}">Next</a>
+            {% else %}
+                <div class="nav-btn-inactive">
+
+                </div>
+            {% endif %} 
+        
+    </div>
+
+    <div class="video-text">   
+    <div>
+        <h3>{{ video.title }} </h3>
+        <p>{{ video.description }}</p><br>
+        <a href="">Share Video</a>
+    </div>
+    {% else %}
+        <h1>No Videos uploaded</h1>
+        <p>Contact the administrator</p>
+    {% endif %}
+</div>
+{% endblock %}
