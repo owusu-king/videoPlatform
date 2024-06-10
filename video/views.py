@@ -65,7 +65,7 @@ def dashboard_view(request):
                 form.save()
             else:
                 return render(request, 'video/dashboard.html', {'video_form': form})        
-    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm()})
+    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm(), 'logs': VideoDetails.objects.all()})
 
 
 
