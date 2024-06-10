@@ -102,6 +102,26 @@ form input {
     cursor: pointer;
 }
 
+.edit {
+    background: #0c2044;
+    cursor: pointer;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.delete {
+    background: darkred;
+    margin-right: 20px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+
 p {
     font-size: 12px;
 }
@@ -223,29 +243,50 @@ p {
 }
 
 
-    /* Basic styles for the pop-up */
-    .popup {
-        display: none;
-        position: fixed;
-        left: 50%;
-        top: 30%;
-        transform: translate(-50%, -50%);
-        background-color: white;
-        border: 1px solid black;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        z-index: 2;
-    }
+/* Basic styles for the pop-up */
+.popup {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
 
-    .popup-overlay {
-        display: none;
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.695);
-        z-index: 1;
-    }
+.popup-overlay {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.695);
+    z-index: 1;
+}
+
+.table-item {
+    width: 100%;
+}
+
+thead {
+    text-align: left;
+
+}
+
+th{
+    padding: 20px 0;
+}
+
+.log-actions {
+    text-align: center;
+}
+
+button {
+    float: right;
+}
 
 
 

@@ -9,10 +9,32 @@
     
     <div class="form-container feed">
         <h1 style="font-size: 20px; text-align: center; margin-bottom: 20px;"> Recently uploaded </h1>
-        {% for log in logs %}
+        <table class="table-item">
+            
+            <thead>
+                <th>Date Uploaded</th>
+                <th>Video Title</th>
+                <th colspan="2" class="log-actions">Actions</th>
+                <hr>
+            </thead>
+            {% for log in logs %}
+            <tbody>
+                <tr>
+                    <td>{{log.upload_date}}</td>
+                    <td>{{ log.title }}</td>
+
+                    <div class="t-actions">
+                    <td><button class="edit">Edit</button></td>
+                    <td><button class="delete">Delete</button></td>
+                    </div>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+        
         <!-- I can use table to display the logs -->
-        <p>{{log.title}}</p>
-        {% endfor %}
+        <p></p>
+        
         <p></p>
     </div>
     
