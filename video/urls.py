@@ -25,5 +25,5 @@ urlpatterns = [
     path('home', views.login_view, name='index'),
     path('home/<int:id>', views.index, name='index'),
 
-    # serving media in development
+    path('share-link/', views.share_link, name='share_link'),
    ]

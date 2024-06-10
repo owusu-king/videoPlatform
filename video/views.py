@@ -18,6 +18,32 @@ from django.contrib.auth.views import PasswordResetConfirmView
 from django.urls import reverse_lazy
 from .forms import PasswordResetForm
 
+#Share modules
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from .forms import ShareLinkForm
+
+@require_POST
+def share_link(request):
+    form = ShareLinkForm(request.POST)
+    if form.is_valid():
+        recipient_email = form.cleaned_data['recipient_email']
+        message = form.cleaned_data['message']
+        page_url = request.POST.get('page_url')  # Get the page URL from the form data
+        subject = 'Check out this page'
+        email_message = f"\n{message}\n\nYou can view the page here: {page_url}"
+        from_email = request.user.username
+
+        try:
+            send_mail(subject, email_message, from_email, [recipient_email])
+            return JsonResponse({'success': True, 'message': 'Link successfully shared!'})
+        except Exception as e:
+            return JsonResponse({'success': False, 'message': f'Error sending email: {e}'})
+    else:
+        return JsonResponse({'success': False, 'message': 'Invalid form data'})
+
+
+
 
 
 

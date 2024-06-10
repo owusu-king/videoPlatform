@@ -5,6 +5,7 @@
     Home | Video Platform 
 {% endblock %}
 
+
 {% block main %}
     {% if video %}
     <div class="video-container">
@@ -34,11 +35,63 @@
     <div>
         <h3>{{ video.title }} </h3>
         <p>{{ video.description }}</p><br>
-        <a href="">Share Video</a>
+        <button id="share-button" class="share-button">Share this Video link</button>
     </div>
     {% else %}
         <h1>No Videos uploaded</h1>
         <p>Contact the administrator</p>
     {% endif %}
 </div>
+{% endblock %}
+
+
+{% block popup %}
+
+<div id="popup-overlay" class="popup-overlay"></div>
+    <div id="share-popup" class="popup form-container">
+        <h1 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Share Video Link</h1>
+        <form id="share-form">
+            {% csrf_token %}            
+            Recipient Email: <input type="email" name="recipient_email" required>        
+            Add Optional Message:<textarea name="message" rows="7"></textarea>
+
+            <input type="hidden" name="page_url" id="page_url" value="{{ request.build_absolute_uri }}">
+
+            <button type="submit" class="share-button" data-url="{% url 'share_link' %}">Share Now</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Show the pop-up
+            $('#share-button').on('click', function() {
+                $('#popup-overlay').show();
+                $('#share-popup').show();
+            });
+
+            // Hide the pop-up
+            $('#popup-overlay').on('click', function() {
+                $('#popup-overlay').hide();
+                $('#share-popup').hide();
+            });
+
+            // Handle form submission
+            $('#share-form').on('submit', function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: '{% url "share_link" %}',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        alert(response.message);
+                        if (response.success) {
+                            $('#popup-overlay').hide();
+                            $('#share-popup').hide();
+                        }
+                    }
+                });
+            });
+        });      
+    </script>
+
 {% endblock %}
