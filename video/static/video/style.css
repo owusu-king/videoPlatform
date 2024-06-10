@@ -65,6 +65,8 @@ form, form input, textarea {
 textarea {
     max-width: 260;
     resize: none;
+    padding: 5px;
+    border: 2px solid black;
 }
 
 form input {
