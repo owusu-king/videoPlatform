@@ -37,3 +37,7 @@ class PasswordResetForm(forms.Form):
         if not User.objects.filter(username=username).exists():
             raise forms.ValidationError("There is no user registered with the specified Email.")
         return username
+
+class ShareLinkForm(forms.Form):
+    recipient_email = forms.EmailField(label='Recipient Email')
+    message = forms.CharField(widget=forms.Textarea, required=False, label='Message')
