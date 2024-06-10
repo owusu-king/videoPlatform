@@ -25,6 +25,7 @@ body {
     width: 50px;
 }
 
+
 .username{
     color: white;
 }
@@ -48,7 +49,6 @@ body {
     color: white;
     transition: 1s;
 }
-
 
 .form-container {
     padding: 20px;
@@ -176,6 +176,30 @@ p {
     font-size: 18px;
 }
 
+.reset-done, .no-videos, .verification {
+    min-width: 100vw;
+    min-height: 100vh;
+    position: fixed;
+    z-index: 1;
+    background-color: #0c2044a5;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    padding-top: 100px;
+}
+
+.reset-done h2, .no-videos h2, .verification h2 {
+    font-size: 50px;
+}
+
+.reset-done p, .no-videos p, .verification p {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 20px;
+}
+
 .admin-main {
     margin: 0 auto;
     width: 80%;
@@ -195,5 +219,19 @@ p {
 .upload-video {
     grid-area: upload-video;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

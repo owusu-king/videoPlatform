@@ -25,3 +25,15 @@ class VideoUploadForm(forms.ModelForm):
     class Meta:
         model = VideoDetails
         fields = ['title', 'description', 'video_file']
+
+
+# password reset form
+
+class PasswordResetForm(forms.Form):
+    username = forms.EmailField(max_length=150, label="Email")
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if not User.objects.filter(username=username).exists():
+            raise forms.ValidationError("There is no user registered with the specified Email.")
+        return username
