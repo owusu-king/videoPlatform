@@ -12,6 +12,7 @@
         <table class="table-item">
             
             <thead>
+                <th>ID</th>
                 <th>DATE UPLOADED</th>
                 <th>VIDEO TITLE</th>
                 <hr>
@@ -19,6 +20,7 @@
             {% for log in logs %}
             <tbody>
                 <tr>
+                    <td>{{ log.pk }}</td>
                     <td>{{log.upload_date}}</td>
                     <td>{{ log.title }}</td>
                 </tr>

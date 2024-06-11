@@ -93,7 +93,7 @@ def dashboard_view(request):
                 form.save()
             else:
                 return render(request, 'video/dashboard.html', {'video_form': form})        
-    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm(), 'logs': VideoDetails.objects.all()[:10]})
+    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm(), 'logs': VideoDetails.objects.all().order_by('-pk')[:10]})
 
 
 
