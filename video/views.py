@@ -23,6 +23,8 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from .forms import ShareLinkForm
 
+
+
 @require_POST
 def share_link(request):
     form = ShareLinkForm(request.POST)
@@ -91,7 +93,7 @@ def dashboard_view(request):
                 form.save()
             else:
                 return render(request, 'video/dashboard.html', {'video_form': form})        
-    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm(), 'logs': VideoDetails.objects.all()})
+    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm(), 'logs': VideoDetails.objects.all()[:10]})
 
 
 

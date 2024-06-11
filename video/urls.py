@@ -26,4 +26,6 @@ urlpatterns = [
     path('home/<int:id>', views.index, name='index'),
 
     path('share-link/', views.share_link, name='share_link'),
+
+    #delete
    ]
