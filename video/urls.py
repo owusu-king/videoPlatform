@@ -27,5 +27,7 @@ urlpatterns = [
 
     path('share-link/', views.share_link, name='share_link'),
 
+    path('delete_video/<int:id>', views.delete_video, name='delete_video')
+
     #delete
    ]

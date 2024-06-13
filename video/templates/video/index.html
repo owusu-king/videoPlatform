@@ -10,11 +10,9 @@
     {% if video %}
     <div class="video-container">
             {% if prev %}
-                <a class="nav-btn" href="{% url 'index' id=prev.pk %}">Prev</a>
+                <a class="nav-btn" href="{% url 'index' id=prev.pk %}" title="Previous Video"><i class="fa fa-arrow-circle-left"></i></a>
             {% else %}
-                <div class="nav-btn-inactive">
-
-                </div>
+                <div class="nav-btn-inactive"></div>
             {% endif %}
         
         <video controls autoplay preload>
@@ -22,24 +20,19 @@
         </video>
         
             {% if next %}
-                <a class="nav-btn" href="{% url 'index' id=next.pk %}">Next</a>
+                <a class="nav-btn" href="{% url 'index' id=next.pk %}" title="Next Video"><i class="fa fa-arrow-circle-right"></i></a>
             {% else %}
-                <div class="nav-btn-inactive">
-
-                </div>
+                <div class="nav-btn-inactive"></div>
             {% endif %} 
         
     </div>
 
     <div class="video-text">   
     <div>
-        <h3>{{ video.title }} </h3>
+        <h3>{{ video.title }}</h3>
         <p>{{ video.description }}</p><br>
-        <button id="share-button" class="share-button">Share this Video link</button>
+        <button id="share-button" class="share-button" title="Share this Video via Email"><i class="fa fa-share"></i> Share this Video</button>
     </div>
-    {% else %}
-        <h1>No Videos uploaded</h1>
-        <p>Contact the administrator</p>
     {% endif %}
 </div>
 {% endblock %}
@@ -49,7 +42,7 @@
 
 <div id="popup-overlay" class="popup-overlay"></div>
     <div id="share-popup" class="popup form-container">
-        <h1 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Share Video Link</h1>
+        <h1>Share Video Link</h1>
         <form id="share-form">
             {% csrf_token %}            
             Recipient Email: <input type="email" name="recipient_email" required>        

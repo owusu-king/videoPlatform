@@ -8,7 +8,7 @@
 
   <!-- FORM CONTAINER  -->
   <div class="form-container">
-    <h1 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Log In</h1>
+    <h1>Log In</h1>
     <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         Email Address: <input type="email" name="username">
@@ -22,8 +22,9 @@
           <input type="submit" value="Sign In" class="submit">   
         </div>        
     </form>
-    <p>Forgot Password?  <a href="{% url 'password_reset'%}">Reset Here</a></p>
-    <p>Don't have an Account?  <a href="{% url 'signup' %}">Sign Up</a></p> 
+    <p class="account">Forgot Password?  <a href="{% url 'password_reset'%}">Reset Here</a></p> 
   </div>
+
+  <p class="account">Don't have an Account?  <a href="{% url 'signup' %}">Sign Up</a></p>
   <!-- END OF FORM CONTAINER  -->
 {% endblock %}

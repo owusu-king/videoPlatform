@@ -22,12 +22,13 @@ body {
 }
 
 .logo {
-    width: 100px;
+    width: 50px;
 }
 
 
 .username{
     color: white;
+    cursor: pointer;
 }
 
 .username:hover{
@@ -56,6 +57,14 @@ body {
     background-color:white;
     margin: 50px auto;
     border-radius: 10px;
+    box-shadow: 1px 3px 5px rgb(23, 23, 23);
+}
+
+.form-container h1 {
+    font-size: 20px; 
+    text-align: center; 
+    margin-bottom: 50px;
+    color: #722F37;
 }
 
 form, form input, textarea {
@@ -67,9 +76,24 @@ textarea {
     resize: none;
 }
 
-form input {
-    padding: 5px;
+form input, textarea {
     margin: 3px 0 10px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+textarea {
+    margin: 3px 0 10px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+
+    outline: none;
+    padding: 7px;
+    border-radius: 5px;
 }
 
 .helptext {
@@ -91,6 +115,12 @@ form input {
 
 .actions .submit {
     background: #0c2044;
+    cursor: pointer;
+}
+
+.actions .submit:hover {
+    background: #722F37;
+    transition: 1s;
     cursor: pointer;
 }
 
@@ -148,7 +178,7 @@ p {
 
 
 .video-container video {
-    width: 700px;
+    width: 500px;
     border-radius: 10px;
     border-color: none;
 
@@ -156,21 +186,37 @@ p {
     
 }
 .nav-btn, .nav-btn-inactive {
-    width: 100px;
     background: #0c2044;
+    border: 1px solid #0c2044;
     padding: 10px 15px;
     margin: 20px;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 50px;
+    height: 40px;
+}
+
+.nav-btn:hover {
+    background: #ccc;
+    transition: 1s;
+    padding: 10px 15px;
+    margin: 20px;
+    color: #0c2044;
+    border: 1px solid #0c2044;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
     height: 40px;
 }
 
 .nav-btn-inactive{
     background: #ccc;
+    border: none;
 }
+
 
 .video-text {
     width: 50%;
@@ -186,6 +232,22 @@ p {
     background-color: #0c2044;
     padding: 10px;
     border-radius: 5px;
+    border: 1px solid #0c2044;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.share-button:hover {
+    color: #0c2044;
+    background-color: #ccc;
+    transition: 1s;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #0c2044;
+    cursor: pointer;
+    width: 100%;
 }
 
 .video-text h3 {
@@ -267,6 +329,7 @@ p {
 
 .table-item {
     width: 100%;
+    border-collapse: collapse;
 }
 
 thead {
@@ -275,13 +338,67 @@ thead {
 }
 
 th{
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 td {
-    padding: 3px 0;
+    padding: 10px 0;
 }
 
+.table-item tr {
+    border-bottom: 1px solid #ccc;
+    
+}
+
+
+.table-item tr:hover{
+    background: #f2f2f2;
+}
+
+.icon-bar {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border-bottom: 0;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+}
+
+.icon-bar a {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 14px;
+  }
+  
+.icon-bar a:hover {
+    background-color: #60778f;
+  }
+  
+.github {
+    background: #000;
+    color: white;
+  }
+  
+.linkedin {
+    background: #007bb5;
+    color: white;
+    border-top-left-radius: 5px;
+  }
+  
+.youtube {
+    background: #f04338;
+    color: white;
+    border-bottom-left-radius: 5px;
+  }
+
+  .account {
+    text-align: center;
+  }
 
 
 

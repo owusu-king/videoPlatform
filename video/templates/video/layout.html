@@ -20,9 +20,9 @@
                   <small class="username">
                     Welcome, {{ request.user.first_name.capitalize }} |                                                              
                   </small>
-                      <a href="{% url 'logout' %}" class="logout-menu">Logout <i class="fa fa-sign-out"></i></a>                                
+                      <a href="{% url 'logout' %}" class="logout-menu" title="Log out">Logout <i class="fa fa-sign-out"></i></a>                                
                 {% else %}
-                    <a href="{% url 'login' %}" class="login-menu" title="Click to Login"><i class="fa fa-sign-in"></i> | Login</a>
+                    <a href="{% url 'login' %}" class="login-menu" title="Click to Login" title="Log in"><i class="fa fa-sign-in"></i> | Login</a>
                 {% endif %}
             </div>
         </header>
@@ -42,7 +42,12 @@
 
     <!-- BEGIN FOOTER  -->
     <footer id="footer">
-        <div></div>
+        <div class="icon-bar">
+            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            <a href="#" class="github"><i class="fa fa-github"></i></a>
+            <a href="#" class="youtube"><i class="fa fa-youtube"></i></a>
+        </div>
+    
     </footer>
     <!-- END OF FOOTER  -->
 

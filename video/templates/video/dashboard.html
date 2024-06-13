@@ -8,13 +8,14 @@
     <section class="admin-main">
     
     <div class="form-container feed">
-        <h1 style="font-size: 20px; text-align: center; margin-bottom: 20px;"> Recently uploaded </h1>
+        <h1> RECENTLY UPLOADED </h1>
         <table class="table-item">
             
             <thead>
                 <th>ID</th>
                 <th>DATE UPLOADED</th>
                 <th>VIDEO TITLE</th>
+                <th>ACTIONS</th>
                 <hr>
             </thead>
             {% for log in logs %}
@@ -23,6 +24,12 @@
                     <td>{{ log.pk }}</td>
                     <td>{{log.upload_date}}</td>
                     <td>{{ log.title }}</td>
+                    <td colspan="2">
+                        <div>
+                            <a href="{% url 'delete_video' log.pk %}" onclick="return confirm('Are you sure to delete\n{{log.title}}?')"> <i class="fa fa-trash"></i> Delete</a> &nbsp;
+                            <a href=""> <i class="fa fa-edit"></i> Edit</a>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
             {% endfor %}
@@ -36,7 +43,7 @@
     
 
     <div class="form-container Upload-video">
-        <h1 style="font-size: 20px; text-align: center; margin-bottom: 20px;"> Video Upload </h1>
+        <h1> Video Upload </h1>
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{video_form.as_p}}

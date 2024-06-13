@@ -7,7 +7,7 @@
 {% block main %}
   <!-- FORM CONTAINER  -->
   <div class="form-container">
-    <h1 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Create an Account</h1>
+    <h1>Create an Account</h1>
     <form action="{% url 'signup' %}" method="POST">
         {% csrf_token %}
         <!-- plug in sign up form from usercreation model  -->
@@ -31,7 +31,7 @@
         
     </form>
 
-    <p>Already have an Account?  <a href="{% url 'login' %}">Login</a></p>
+    <p class="account">Already have an Account?  <a href="{% url 'login' %}">Login</a></p>
   </div>
   <!-- END OF FORM CONTAINER  -->
     
