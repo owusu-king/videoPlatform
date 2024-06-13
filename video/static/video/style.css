@@ -119,13 +119,14 @@ textarea {
 }
 
 .actions .submit:hover {
-    background: #722F37;
+    background: #ccc;
     transition: 1s;
+    color: #0c2044;
     cursor: pointer;
 }
 
 .actions .reset {
-    background: darkred;
+    background: #722F37;
     margin-right: 20px;
     cursor: pointer;
 }
@@ -140,7 +141,7 @@ textarea {
 }
 
 .delete {
-    background: darkred;
+    background: #722F37;
     margin-right: 20px;
     cursor: pointer;
     color: white;
@@ -155,13 +156,13 @@ p {
 }
 
 .error {
-    color: darkred;
+    color: #722F37;
     font-size: 14px;
     text-align: center;
 }
 
 .errorlist{
-    color: darkred;
+    color: #722F37;
     font-size: 14px;
     text-align: center;
     list-style: none;
@@ -399,6 +400,24 @@ td {
   .account {
     text-align: center;
   }
+
+.video-actions .delete:hover {
+    color: #37171b;
+    background-color: #ccc;
+    transition: 0.5s;
+ }
+
+ .video-actions .edit {
+    background-color: #0c2044;
+    
+ }
+
+ .video-actions .edit:hover {
+    background-color: #ccc;
+    color: #0c2044;
+    transition: 0.5s;
+ }
+
 
 
 

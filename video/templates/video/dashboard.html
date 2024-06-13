@@ -25,9 +25,9 @@
                     <td>{{log.upload_date}}</td>
                     <td>{{ log.title }}</td>
                     <td colspan="2">
-                        <div>
-                            <a href="{% url 'delete_video' log.pk %}" onclick="return confirm('Are you sure to delete\n{{log.title}}?')"> <i class="fa fa-trash"></i> Delete</a> &nbsp;
-                            <a href=""> <i class="fa fa-edit"></i> Edit</a>
+                        <div class="video-actions">
+                            <a class="delete" href="{% url 'delete_video' log.pk %}" onclick="return confirm('Are you sure to delete\n{{log.title}}?')"> <i class="fa fa-trash"></i> Delete</a> &nbsp;
+                            <a class="edit" href="{% url 'edit' log.pk %}"> <i class="fa fa-edit"></i> Edit</a>
                         </div>
                     </td>
                 </tr>
@@ -43,7 +43,7 @@
     
 
     <div class="form-container Upload-video">
-        <h1> Video Upload </h1>
+        <h1> Upload New Video </h1>
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{video_form.as_p}}

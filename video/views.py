@@ -23,6 +23,15 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from .forms import ShareLinkForm
 
+def edit_video(request, id):
+    video = VideoDetails.objects.get(pk=id)
+    if request.method =='POST':
+        form = VideoUploadForm(request.POST, instance=video)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('dashboard'))
+    return render(request, 'video/edit.html', {'form':VideoUploadForm(instance=video)})
+
 def delete_video(request, id):
     if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
         return HttpResponseRedirect(reverse('login'))

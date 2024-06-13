@@ -1,0 +1,19 @@
+{% extends 'video/layout.html' %}
+
+{% block title %} 
+  Edit Video | Video Platform
+{% endblock %}
+
+{% block main %}
+
+<div class="form-container">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+    <div class="actions">
+        <input type="submit" value="Save Changes" class="submit" onclick="return confirm('Are you sure to save the changes?')">
+    </div>
+    </form>
+</div>
+<p class="account">Not Sure to edit now? <a href="{% url 'dashboard' %}">Cancel</a></p>
+{% endblock %}
