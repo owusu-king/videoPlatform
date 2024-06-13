@@ -23,29 +23,6 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from .forms import ShareLinkForm
 
-def edit_video(request, id):
-    if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
-        return HttpResponseRedirect(reverse('login'))
-    else:
-        if not request.user.groups.filter(name='Controller').exists():
-            return HttpResponseRedirect(reverse('first'))
-    video = VideoDetails.objects.get(pk=id)
-    if request.method =='POST':
-        form = VideoUploadForm(request.POST, instance=video)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('dashboard'))
-    return render(request, 'video/edit.html', {'form':VideoUploadForm(instance=video)})
-
-def delete_video(request, id):
-    if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
-        return HttpResponseRedirect(reverse('login'))
-    else:
-        if not request.user.groups.filter(name='Controller').exists():
-            return HttpResponseRedirect(reverse('first'))       
-    video = VideoDetails.objects.get(pk=id)
-    video.delete()
-    return HttpResponseRedirect(reverse('dashboard'))
 
 
 
@@ -75,7 +52,7 @@ def share_link(request):
 
 
 # AUTHENTICATED USER VIEWS FOR ADMINISTRATOR AND NORMAL USERS
-
+# Get the first video in the database to handle exceptions if no video is uploaded
 def first_video(request):
     if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
         return HttpResponseRedirect(reverse('login'))
@@ -86,7 +63,9 @@ def first_video(request):
     if first_video:
         return HttpResponseRedirect(reverse('index', args=[first_video.pk]))
     else:
-        return render(request, 'video/no_video.html')   
+        return render(request, 'video/no_video.html')  
+
+
 
 # Video page, denoting the index view
 def index(request, id): # Pass a video id to display a particular video
@@ -101,6 +80,8 @@ def index(request, id): # Pass a video id to display a particular video
     previous_video = VideoDetails.objects.filter(pk__lt=video.pk).order_by('-pk').first()
 
     return render(request, 'video/index.html', {'video' : video, 'next': next_video, 'prev': previous_video}) # Otherwise, give them the index page.
+
+
 
 # Dashboard view for Admin to upload videos
 def dashboard_view(request):
@@ -206,6 +187,36 @@ def logout_view(request):
 
 
 
+# BASIC VIDEO ACTIONS ADD ON THE DASHBOARD
+# Edit Video on Dashboard
+def edit_video(request, id):
+    if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
+        return HttpResponseRedirect(reverse('login'))
+    else:
+        if not request.user.groups.filter(name='Controller').exists():
+            return HttpResponseRedirect(reverse('first'))
+    video = VideoDetails.objects.get(pk=id)
+    if request.method =='POST':
+        form = VideoUploadForm(request.POST, instance=video)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('dashboard'))
+    return render(request, 'video/edit.html', {'form':VideoUploadForm(instance=video)})
+
+
+
+# Delete the View
+def delete_video(request, id):
+    if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
+        return HttpResponseRedirect(reverse('login'))
+    else:
+        if not request.user.groups.filter(name='Controller').exists():
+            return HttpResponseRedirect(reverse('first'))       
+    video = VideoDetails.objects.get(pk=id)
+    video.delete()
+    return HttpResponseRedirect(reverse('dashboard'))
+
+
 
 # PASSWORD RESET VIEWS
 # A view to request password reset, contains a form for user's email
@@ -238,7 +249,8 @@ def password_reset_request(request):
     return render(request, 'video/reset_password/password_reset_form.html', {'form': form})
 
 
-# confirm
+
+# confirm by setting a new password
 class PasswordResetConfirmView(PasswordResetConfirmView):
     template_name = 'video/reset_password/password_reset_confirm.html'
     success_url = reverse_lazy('password_reset_complete')
@@ -247,8 +259,10 @@ class PasswordResetConfirmView(PasswordResetConfirmView):
         if self.request.user.is_authenticated:
             return HttpResponseRedirect(reverse('first'))  # Ensure authenticated users cannot access this view
         return super().dispatch(*args, **kwargs)
-
     
+
+
+# A view to show reset request is sent to mail   
 def password_reset_done(request):
     if request.user.is_authenticated: # If users are already authenticated, deny this page
         if VideoDetails.objects.first():
@@ -257,6 +271,9 @@ def password_reset_done(request):
             return HttpResponseRedirect(reverse('first'))
     return render(request, 'video/reset_password/password_reset_done.html')
 
+
+
+# A view after new password is set
 def password_reset_complete(request):
     if request.user.is_authenticated: # If users are already authenticated, deny this page
         if VideoDetails.objects.first():
