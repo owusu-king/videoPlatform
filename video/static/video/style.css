@@ -21,6 +21,17 @@ body {
     justify-content: space-between;
 }
 
+#header:hover {
+    background-color:  #1c2941;
+    align-items: center;
+    transition: 1s;
+    padding: 10px 40px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .logo {
     width: 50px;
 }
@@ -29,6 +40,7 @@ body {
 .username{
     color: white;
     cursor: pointer;
+    padding-right: 50px;
 }
 
 .username:hover{
@@ -42,7 +54,7 @@ body {
 }
 
 .logout-menu:hover {
-    color: red;
+    color: #37171b;
     transition: 1s;
 }
 
@@ -129,6 +141,14 @@ textarea {
     background: #722F37;
     margin-right: 20px;
     cursor: pointer;
+}
+
+.actions .reset:hover {
+    background: #ccc;
+    color: #37171b;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: 1s;
 }
 
 .edit {
@@ -220,7 +240,7 @@ p {
 
 
 .video-text {
-    width: 50%;
+    width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -229,34 +249,36 @@ p {
 }
 
 .share-button {
-    color: white;
-    background-color: #0c2044;
-    padding: 10px;
+    background-color: #ccc;
+    color: #0c2044;
+    padding: 12px;
     border-radius: 5px;
     border: 1px solid #0c2044;
     outline: none;
-    border: none;
     cursor: pointer;
     width: 100%;
+    margin-left: auto;
+    text-align: center;
 }
 
 .share-button:hover {
-    color: #0c2044;
-    background-color: #ccc;
+    color: #ccc;
+    background-color: #0c2044;
     transition: 1s;
-    padding: 10px;
+    padding: 12px;
     border-radius: 5px;
-    border: 1px solid #0c2044;
     cursor: pointer;
     width: 100%;
 }
 
 .video-text h3 {
     font-size: 24px;
+    text-align: center;
 }
 
 .video-text p {
     font-size: 18px;
+    text-align: center;
 }
 
 .reset-done, .no-videos, .verification {

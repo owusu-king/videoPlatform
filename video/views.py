@@ -24,6 +24,11 @@ from django.views.decorators.http import require_POST
 from .forms import ShareLinkForm
 
 def edit_video(request, id):
+    if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
+        return HttpResponseRedirect(reverse('login'))
+    else:
+        if not request.user.groups.filter(name='Controller').exists():
+            return HttpResponseRedirect(reverse('first'))
     video = VideoDetails.objects.get(pk=id)
     if request.method =='POST':
         form = VideoUploadForm(request.POST, instance=video)
