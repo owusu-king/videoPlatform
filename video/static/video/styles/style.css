@@ -12,7 +12,7 @@ body {
 }
 
 #header {
-    background-color:  #0c2044;
+    background-color:  #1c2941;
     align-items: center;
     padding: 10px 40px;
     height: 70px;
@@ -22,7 +22,7 @@ body {
 }
 
 #header:hover {
-    background-color:  #1c2941;
+    background-color:  #1c2638;
     align-items: center;
     transition: 1s;
     padding: 10px 40px;
@@ -33,7 +33,7 @@ body {
 }
 
 .logo {
-    width: 50px;
+    width: 200px;
 }
 
 
