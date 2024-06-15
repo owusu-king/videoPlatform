@@ -30,5 +30,4 @@ urlpatterns = [
     path('delete_video/<int:id>', views.delete_video, name='delete_video'),
     path('<int:id>/edit', views.edit_video, name='edit'),
 
-    #delete
    ]

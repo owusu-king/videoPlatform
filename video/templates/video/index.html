@@ -12,7 +12,9 @@
             {% if prev %}
                 <a class="nav-btn" href="{% url 'index' id=prev.pk %}" title="Previous Video"><i class="fa fa-arrow-circle-left"></i></a>
             {% else %}
-                <div class="nav-btn-inactive"></div>
+                <div class="nav-btn-inactive">
+                    <i class="fa fa-arrow-circle-left"></i>
+                </div>
             {% endif %}
         
         <video controls autoplay preload>
@@ -22,7 +24,9 @@
             {% if next %}
                 <a class="nav-btn" href="{% url 'index' id=next.pk %}" title="Next Video"><i class="fa fa-arrow-circle-right"></i></a>
             {% else %}
-                <div class="nav-btn-inactive"></div>
+                <div class="nav-btn-inactive">
+                    <i class="fa fa-arrow-circle-right"></i>
+                </div>
             {% endif %} 
         
     </div>
