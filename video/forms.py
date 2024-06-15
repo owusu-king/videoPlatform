@@ -1,5 +1,5 @@
 from django import forms
-from .models import VideoDetails
+from .models import Video
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -23,7 +23,7 @@ class UserCreationForm(UserCreationForm):
 # A form for the controller user to upload video
 class VideoUploadForm(forms.ModelForm):
     class Meta:
-        model = VideoDetails
+        model = Video
         fields = ['title', 'description', 'video_file']
 
 

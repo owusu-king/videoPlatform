@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import VideoDetails
+from .models import Video
 from .forms import UserCreationForm, VideoUploadForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -59,7 +59,7 @@ def first_video(request):
     else:
         if request.user.groups.filter(name='Controller').exists():
             return HttpResponseRedirect(reverse('dashboard'))
-    first_video = VideoDetails.objects.order_by('pk').first()
+    first_video = Video.objects.order_by('pk').first()
     if first_video:
         return HttpResponseRedirect(reverse('index', args=[first_video.pk]))
     else:
@@ -74,10 +74,10 @@ def index(request, id): # Pass a video id to display a particular video
     else:
         if request.user.groups.filter(name='Controller').exists():
             return HttpResponseRedirect(reverse('dashboard'))
-    video = VideoDetails.objects.get(id=id)
+    video = Video.objects.get(id=id)
 
-    next_video = VideoDetails.objects.filter(pk__gt=video.pk).order_by('pk').first()
-    previous_video = VideoDetails.objects.filter(pk__lt=video.pk).order_by('-pk').first()
+    next_video = Video.objects.filter(pk__gt=video.pk).order_by('pk').first()
+    previous_video = Video.objects.filter(pk__lt=video.pk).order_by('-pk').first()
 
     return render(request, 'video/index.html', {'video' : video, 'next': next_video, 'prev': previous_video}) # Otherwise, give them the index page.
 
@@ -89,8 +89,8 @@ def dashboard_view(request):
         return HttpResponseRedirect(reverse('login'))
     else:
         if not request.user.groups.filter(name='Controller').exists():
-            if VideoDetails.objects.first():
-                return HttpResponseRedirect(reverse('index', args=[VideoDetails.objects.first().id]))
+            if Video.objects.first():
+                return HttpResponseRedirect(reverse('index', args=[Video.objects.first().id]))
             else:
                 return HttpResponseRedirect(reverse('first'))  
         if request.method == 'POST': # If admin uploads a new video
@@ -99,7 +99,7 @@ def dashboard_view(request):
                 form.save()
             else:
                 return render(request, 'video/dashboard.html', {'video_form': form})        
-    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm(), 'logs': VideoDetails.objects.all().order_by('-pk')[:10]})
+    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm(), 'logs': Video.objects.all().order_by('-pk')[:10]})
 
 
 
@@ -108,8 +108,8 @@ def dashboard_view(request):
 # Signup View, for user registration.
 def signup_view(request): 
     if request.user.is_authenticated: # If users are already authenticated, deny this page
-        if VideoDetails.objects.first():
-            return HttpResponseRedirect(reverse('index', args=[VideoDetails.objects.first().id]))
+        if Video.objects.first():
+            return HttpResponseRedirect(reverse('index', args=[Video.objects.first().id]))
         else:
             return HttpResponseRedirect(reverse('first'))  
     if request.method == 'POST':
@@ -159,8 +159,8 @@ def activate(request, uidb64, token):
 # Login View, for user login action
 def login_view(request):
     if request.user.is_authenticated: # If users are already authenticated, deny this page
-        if VideoDetails.objects.first():
-            return HttpResponseRedirect(reverse('index', args=[VideoDetails.objects.first().id]))
+        if Video.objects.first():
+            return HttpResponseRedirect(reverse('index', args=[Video.objects.first().id]))
         else:
             return HttpResponseRedirect(reverse('first'))
 
@@ -171,8 +171,8 @@ def login_view(request):
         user = authenticate(request, username=username, password = password) # authenticate with django's default authenticate module
         if user is not None:
             login(request, user)
-            if VideoDetails.objects.first():
-                return HttpResponseRedirect(reverse('index', args=[VideoDetails.objects.first().id]))
+            if Video.objects.first():
+                return HttpResponseRedirect(reverse('index', args=[Video.objects.first().id]))
             else:
                 return HttpResponseRedirect(reverse('first'))
         else:
@@ -195,7 +195,7 @@ def edit_video(request, id):
     else:
         if not request.user.groups.filter(name='Controller').exists():
             return HttpResponseRedirect(reverse('first'))
-    video = VideoDetails.objects.get(pk=id)
+    video = Video.objects.get(pk=id)
     if request.method =='POST':
         form = VideoUploadForm(request.POST, instance=video)
         if form.is_valid():
@@ -212,7 +212,7 @@ def delete_video(request, id):
     else:
         if not request.user.groups.filter(name='Controller').exists():
             return HttpResponseRedirect(reverse('first'))       
-    video = VideoDetails.objects.get(pk=id)
+    video = Video.objects.get(pk=id)
     video.delete()
     return HttpResponseRedirect(reverse('dashboard'))
 
@@ -222,8 +222,8 @@ def delete_video(request, id):
 # A view to request password reset, contains a form for user's email
 def password_reset_request(request):
     if request.user.is_authenticated: # If users are already authenticated, deny this page
-        if VideoDetails.objects.first():
-            return HttpResponseRedirect(reverse('index', args=[VideoDetails.objects.first().id]))
+        if Video.objects.first():
+            return HttpResponseRedirect(reverse('index', args=[Video.objects.first().id]))
         else:
             return HttpResponseRedirect(reverse('first'))
     if request.method == 'POST':
@@ -265,8 +265,8 @@ class PasswordResetConfirmView(PasswordResetConfirmView):
 # A view to show reset request is sent to mail   
 def password_reset_done(request):
     if request.user.is_authenticated: # If users are already authenticated, deny this page
-        if VideoDetails.objects.first():
-            return HttpResponseRedirect(reverse('index', args=[VideoDetails.objects.first().id]))
+        if Video.objects.first():
+            return HttpResponseRedirect(reverse('index', args=[Video.objects.first().id]))
         else:
             return HttpResponseRedirect(reverse('first'))
     return render(request, 'video/reset_password/password_reset_done.html')
@@ -276,8 +276,8 @@ def password_reset_done(request):
 # A view after new password is set
 def password_reset_complete(request):
     if request.user.is_authenticated: # If users are already authenticated, deny this page
-        if VideoDetails.objects.first():
-            return HttpResponseRedirect(reverse('index', args=[VideoDetails.objects.first().id]))
+        if Video.objects.first():
+            return HttpResponseRedirect(reverse('index', args=[Video.objects.first().id]))
         else:
             return HttpResponseRedirect(reverse('first'))
     return render(request, 'video/reset_password/password_reset_complete.html')
