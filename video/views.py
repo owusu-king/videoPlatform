@@ -26,6 +26,8 @@ from .forms import ShareLinkForm
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
 
+message = ''
+
 
 
 
@@ -177,12 +179,13 @@ def login_view(request):
             return HttpResponseRedirect(reverse('index', args=[Video.objects.first().id]))
         else:
             return HttpResponseRedirect(reverse('first'))
-
+    
     if request.method == 'POST':
         # if the request method is POST, get the form fields and authenticate the user
         username = request.POST['username']
         password = request.POST['password']        
         user = authenticate(request, username=username, password = password) # authenticate with django's default authenticate module
+        
         if user is not None:
             login(request, user)
             if Video.objects.first():
@@ -190,7 +193,11 @@ def login_view(request):
             else:
                 return HttpResponseRedirect(reverse('first'))
         else:
-            return render(request, 'video/login.html', {'message':"Invalid Credentials"}) # If authentication, fails, display login page again, with error message
+            if User.objects.filter(username=username).exists():
+                message = "Incorrect password, Please try again or reset."
+            else:
+                message = "No user with this email exist. You can signup with us."
+            return render(request, 'video/login.html', {'message':message}) # If authentication, fails, display login page again, with error message
 
     return render(request, 'video/login.html') # Defaut request method is GET, so, provide a new login form
 
