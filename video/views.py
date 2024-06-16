@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import os
 from .models import Video
 from .forms import UserCreationForm, VideoUploadForm
 from django.urls import reverse
@@ -25,8 +26,10 @@ from .forms import ShareLinkForm
 
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
-from django.contrib import messages
 message = ''
+
+from django.db.models import F, Value, CharField
+from django.db.models.functions import Substr, Concat
 
 
 
@@ -101,6 +104,13 @@ def index(request, id): # Pass a video id to display a particular video
 
 # Dashboard view for Admin to upload videos
 def dashboard_view(request):
+
+    # Get all videos to display few logs. also, to make the logs clean, get only 40 chars out of the title and append ...
+    videos = Video.objects.annotate(
+    truncated_title=Substr(F('title'), 1, 40, output_field=CharField())).annotate(display_title=Concat(F('truncated_title'), 
+    Value('...'), output_field=CharField())).order_by('-pk')[:7]
+    
+
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('login'))
     else:
@@ -114,8 +124,8 @@ def dashboard_view(request):
             if form.is_valid():
                 form.save()
             else:
-                return render(request, 'video/dashboard.html', {'video_form': form})        
-    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm(), 'logs': Video.objects.all().order_by('-pk')[:7]})
+                return render(request, 'video/dashboard.html', {'video_form': form})       
+    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm(), 'logs': videos})
 
 
 
@@ -240,13 +250,26 @@ def edit_video(request, id):
 
 # Delete the View
 def delete_video(request, id):
-    if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
+    if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('login'))
-    else:
-        if not request.user.groups.filter(name='Controller').exists():
-            return HttpResponseRedirect(reverse('first'))       
-    video = Video.objects.get(pk=id)
+    elif not request.user.groups.filter(name='Controller').exists():
+        return HttpResponseRedirect(reverse('first'))
+    
+    try:
+        video = Video.objects.get(pk=id)
+    except Video.DoesNotExist:
+        return HttpResponseRedirect(reverse('dashboard'))
+
+    # Get the file path and construct the absolute path
+    file_path = os.path.join(settings.MEDIA_ROOT, str(video.video_file))
+    
+    # Delete the file if it exists
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+    # Delete the Video object from the database
     video.delete()
+
     return HttpResponseRedirect(reverse('dashboard'))
 
 

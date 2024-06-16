@@ -5,17 +5,17 @@
 {% endblock %}
 
 {% block main %}
-<div id="progress-container">
-    <div id="progress"></div>
-</div>
+
     <section class="admin-main">
+        <div id="progress-container">
+            <div id="progress"></div>
+        </div>
 
     <div class="form-container feed">
         <h1> RECENTLY UPLOADED </h1>
         <table class="table-item">
             
             <thead>
-                <th>ID</th>
                 <th>DATE UPLOADED</th>
                 <th>VIDEO TITLE</th>
                 <th>ACTIONS</th>
@@ -24,9 +24,8 @@
             {% for log in logs %}
             <tbody>
                 <tr>
-                    <td>{{ log.pk }}</td>
                     <td>{{log.upload_date}}</td>
-                    <td>{{ log.title }}</td>
+                    <td>{{ log.display_title }}</td>
                     <td colspan="2">
                         <div class="video-actions">
                             <a class="delete" href="{% url 'delete_video' log.pk %}" onclick="return confirm('Are you sure to delete\n{{log.title}}?')"> <i class="fa fa-trash"></i> Delete</a> &nbsp;
@@ -84,7 +83,7 @@
                     var progressBar = document.getElementById("progress");
                     var progressContainer = document.getElementById("progress-container");
 
-                    progressContainer.style.display = "block";  // Show progress bar
+                    progressContainer.style.display = "flex";  // Show progress bar
                     progressContainer.style.zIndex = '5'
                     progressContainer.style.position = "fixed"
                     progressBar.style.width = percentComplete + "%";
@@ -101,15 +100,17 @@
     </script>
     <style>
         #progress-container {
-            width: 100%;
+            width: 80%;
             background-color: #f3f3f3;
-            margin: 20px 0;
+            margin: 20px auto;
+            margin: 10px;
             display: none; /* Hide by default */
         }
         #progress {
             width: 0;
             height: 30px;
-            background-color: #4caf50;
+            background-color: #0c2044;
+            box-sizing: border-box;
             text-align: center;
             line-height: 30px;
             color: white;
