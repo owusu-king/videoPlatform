@@ -25,6 +25,7 @@
         }
         .email-body {
             text-align: left;
+            font-size: 13px;
         }
         .verification-link {
             font-size: 16px;
@@ -46,13 +47,14 @@
         </div>
         <div class="email-body">
             <p>Dear {{ user.first_name }},</p>
-            <p>Thank you for registering. Please use the following link to complete your registration:</p>
+            <p>Thank you for joining us. for the last step, click on the following link or copy the link and paste in in a browser to complete your registration:</p>
             <pre class="verification-link">http://{{ domain }}{% url 'activate' uidb64=uid token=token %}</pre>
-            <p>This link is valid for 10 minutes.</p>
+            <p>Please note that this link is valid for 10 minutes.</p>
         </div>
         <div class="email-footer">
             <p>Thank you,</p>
-            <p>&copy;King Owusu | All Rights reserved</p>
+            <p>King Owusu</p>
+            <p>&copy;2024 | All Rights reserved</p>
         </div>
     </div>
 </body>

@@ -42,9 +42,19 @@ def share_link(request):
         subject = 'Check out this page'
         email_message = f"\n{message}\n\nYou can view the page here: {page_url}"
         from_email = request.user.username
+        context = {
+            'page_url': page_url,
+        }
+
+        
 
         try:
-            send_mail(subject, email_message, from_email, [recipient_email])
+            html_content = render_to_string('video/share_email.html', context )
+            text_content = strip_tags(html_content)
+
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [recipient_email])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
             return JsonResponse({'success': True, 'message': 'Link successfully shared!'})
         except Exception as e:
             return JsonResponse({'success': False, 'message': f'Error sending email: {e}'})
@@ -136,6 +146,7 @@ def signup_view(request):
                 'domain': current_site.domain,
                 'uid': uid,
                 'token': token,
+                'protocol': 'http',
             }
             html_content = render_to_string('video/verification/activate_email_info.html', context )
             text_content = strip_tags(html_content)
@@ -258,13 +269,21 @@ def password_reset_request(request):
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             current_site = get_current_site(request)
             mail_subject = 'Password Reset Requested'
-            message = render_to_string('video/reset_password/password_reset_email.html', {
+            context =  {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': uid,
                 'token': token,
-            })
-            send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [user.username])
+                'protocol': 'http',
+            }
+
+
+            html_content = render_to_string('video/reset_password/password_reset_email.html', context )
+            text_content = strip_tags(html_content)
+
+            msg = EmailMultiAlternatives(mail_subject, text_content, settings.EMAIL_HOST_USER, [user.username])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
             return HttpResponseRedirect(reverse('password_reset_done'))
     else:
         form = PasswordResetForm()
@@ -276,11 +295,6 @@ def password_reset_request(request):
 class PasswordResetConfirmView(PasswordResetConfirmView):
     template_name = 'video/reset_password/password_reset_confirm.html'
     success_url = reverse_lazy('password_reset_complete')
-
-    def dispatch(self, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('first'))  # Ensure authenticated users cannot access this view
-        return super().dispatch(*args, **kwargs)
     
 
 
