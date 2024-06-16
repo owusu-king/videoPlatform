@@ -60,7 +60,7 @@ body {
 .logout-menu:hover {
     color: #ccc;
     transition: 0.5s;
-    border: 1px solid red;
+    border: 1px solid #37171b;
     padding: 5px;
 }
 
@@ -303,6 +303,7 @@ p {
     justify-content: flex-start;
     align-items: center;
     color: #ccc;
+    padding-top: 100px;
 }
 
 .reset-done h2, .no-videos h2, .verification h2 {

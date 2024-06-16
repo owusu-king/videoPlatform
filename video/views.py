@@ -23,6 +23,9 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from .forms import ShareLinkForm
 
+from django.core.mail import EmailMultiAlternatives
+from django.utils.html import strip_tags
+
 
 
 
@@ -116,24 +119,28 @@ def signup_view(request):
         # when the request method of this view is a POST, then get the form object and save the fields to the db
         form = UserCreationForm(request.POST)
         if form.is_valid():
+
             user = form.save(commit=False) # Do not commit user details to db yes, lets wait for activation
             user.is_active = False # Set user inactive and save the record
             form.save()
-
-
             
             # do verification
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             current_site = get_current_site(request)
             mail_subject = 'Confirm Account Activation'
-            message = render_to_string('video/verification/activate_email_info.html', {
+            context = {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': uid,
                 'token': token,
-            })
-            send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [user.username])
+            }
+            html_content = render_to_string('video/verification/activate_email_info.html', context )
+            text_content = strip_tags(html_content)
+
+            msg = EmailMultiAlternatives(mail_subject, text_content, settings.EMAIL_HOST_USER, [user.username])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
             return render(request, 'video/verification/verification_confirm.html')
 
             # logout(request) # Stop taking users to the video page after signup,
@@ -149,13 +156,18 @@ def activate(request, uidb64, token):
         user = User.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
-
+        return HttpResponseRedirect(reverse('login'))   
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
         return render(request, 'video/verification/activation_complete.html')
+    
+    elif user.is_active == True and not default_token_generator.check_token(user, token):
+        return render(request, 'video/verification/already_verified.html')
     else:
-        return render(request, 'video/verification/activation_invalid.html')
+        if user.is_active == False and not default_token_generator.check_token(user, token):
+            user.delete()
+            return render(request, 'video/verification/activation_invalid.html')
 
 
 # Login View, for user login action

@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %} 
-  Invalid Activation | Video Platform
+  Already Activation | Video Platform
 {% endblock %}
 
 {% block main %}
@@ -11,7 +11,8 @@
     <div>
       <img src="{% static 'video/images/error.png' %}" alt="Error" width="100px">
     </div>
-        <h2>Verification Failed</h2>
-        <p>Sorry, your account activation failed because the link has expired!</p>
+        <h2>Completed Activation</h2>
+        <p>Yello, this activation link has already been used. you may <a href="{% url 'login' %}">Login</a> now because your accout is active</p>
+        
 </div>  
 {% endblock %}
