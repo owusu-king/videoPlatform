@@ -40,13 +40,14 @@ def share_link(request):
         message = form.cleaned_data['message']
         page_url = request.POST.get('page_url')  # Get the page URL from the form data
         subject = 'Check out this page'
-        email_message = f"\n{message}\n\nYou can view the page here: {page_url}"
+        message = f"\n{message}\n\n"
         from_email = request.user.username
+        rec_uname = recipient_email[:recipient_email.index('@')]
         context = {
             'page_url': page_url,
+            'message': message,
+            'name': rec_uname,
         }
-
-        
 
         try:
             html_content = render_to_string('video/share_email.html', context )
