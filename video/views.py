@@ -115,7 +115,7 @@ def dashboard_view(request):
                 form.save()
             else:
                 return render(request, 'video/dashboard.html', {'video_form': form})        
-    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm(), 'logs': Video.objects.all().order_by('-pk')[:10]})
+    return render(request, 'video/dashboard.html', {'video_form': VideoUploadForm(), 'logs': Video.objects.all().order_by('-pk')[:7]})
 
 
 
@@ -206,7 +206,6 @@ def login_view(request):
                 return HttpResponseRedirect(reverse('first'))
         else:
             if User.objects.filter(username=username).exists():
-                messages.error(request, 'Invalid password')
                 message = "Incorrect password, try again"
             else:
                 message = "No user with this email exist."

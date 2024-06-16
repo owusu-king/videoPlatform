@@ -41,6 +41,8 @@ class VideoUploadForm(forms.ModelForm):
         model = Video
         fields = ['title', 'description', 'video_file']
 
+        
+
 
 # password reset form
 

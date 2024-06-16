@@ -5,7 +5,11 @@
 {% endblock %}
 
 {% block main %}
-    <section class="admin-main">    
+<div id="progress-container">
+    <div id="progress"></div>
+</div>
+    <section class="admin-main">
+
     <div class="form-container feed">
         <h1> RECENTLY UPLOADED </h1>
         <table class="table-item">
@@ -48,12 +52,70 @@
             {{video_form.as_p}}
             <div class="actions">
                 <input type="reset" value="Clear" class="reset">
-                <input type="submit" value="Upload" class="submit">   
-              </div>
+                <input type="submit" class="submit" value="Upload" onclick="uploadFile()">      
+            </div>
         </form>
     </div>
-
 </section>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Video Upload</title>
+    <script>
+
+        function getCSRFToken() {
+                var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+                return csrfToken;
+            }
+
+        function uploadFile() {
+            var formData = new FormData();
+            var file = document.getElementById("id_video_file").files[0];
+            formData.append("id_video_file", file);
+
+            var xhr = new XMLHttpRequest();
+            
+            xhr.open("POST", "", true);
+            xhr.setRequestHeader("X-CSRFToken", getCSRFToken());
+            xhr.upload.onprogress = function(event) {
+                if (event.lengthComputable) {
+                    var percentComplete = (event.loaded / event.total) * 100;
+                    var progressBar = document.getElementById("progress");
+                    var progressContainer = document.getElementById("progress-container");
+
+                    progressContainer.style.display = "block";  // Show progress bar
+                    progressContainer.style.zIndex = '5'
+                    progressContainer.style.position = "fixed"
+                    progressBar.style.width = percentComplete + "%";
+                    progressBar.innerHTML = Math.round(percentComplete) + "%";
+                }
+            };
+
+            xhr.onload = function() {
+                document.getElementById("progress-container").style.display = "none"; // Hide progress bar after completion
+            };
+
+            xhr.send(formData);
+        }
+    </script>
+    <style>
+        #progress-container {
+            width: 100%;
+            background-color: #f3f3f3;
+            margin: 20px 0;
+            display: none; /* Hide by default */
+        }
+        #progress {
+            width: 0;
+            height: 30px;
+            background-color: #4caf50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+    </style>
+</head>
 {% endblock %}
 
 

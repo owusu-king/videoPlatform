@@ -60,7 +60,7 @@ body {
 .logout-menu:hover {
     color: #ccc;
     transition: 0.5s;
-    border: 1px solid #37171b;
+    border: 1px solid #ccc;
     padding: 5px;
 }
 
@@ -254,8 +254,8 @@ p {
 }
 
 .share-button {
-    background-color: white;
-    color: #0c2044;
+    background-color: #0c2044;
+    color: #ccc;
     padding: 12px;
     border-radius: 5px;
     border: 1px solid #0c2044;
@@ -267,8 +267,8 @@ p {
 }
 
 .share-button:hover {
-    color: #ccc;
-    background-color: #0c2044;
+    color: #0c2044;
+    background-color: #ccc;
     transition: 1s;
 
 }
@@ -335,7 +335,7 @@ p {
     display: none;
     position: fixed;
     left: 50%;
-    top: 30%;
+    top: 40%;
     transform: translate(-50%, -50%);
     background-color: white;
     border: 1px solid black;
