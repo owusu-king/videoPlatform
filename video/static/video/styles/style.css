@@ -71,7 +71,7 @@ body {
 
 .form-container {
     padding: 20px;
-    width: 300px;
+    width: 350px;
     background-color:white;
     margin: 50px auto;
     border-radius: 10px;
@@ -133,6 +133,7 @@ textarea {
 
 .actions .submit {
     background: #0c2044;
+    padding: 10px;
     cursor: pointer;
 }
 
@@ -283,11 +284,13 @@ p {
 }
 
 .video-text h3 {
+    color: #0c2044;
     font-size: 24px;
     text-align: center;
 }
 
 .video-text p {
+    padding-top: 10px;
     font-size: 18px;
     text-align: center;
 }
@@ -452,6 +455,11 @@ td {
     background-color: #ccc;
     color: #0c2044;
     transition: 0.5s;
+ }
+
+ .form-check {
+    display: grid;
+    grid-template-columns: 0.1fr 1fr;
  }
 
 

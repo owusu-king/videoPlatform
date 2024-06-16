@@ -5,12 +5,26 @@ from django.contrib.auth.models import User
 
 # A form for Account Creation,
 class UserCreationForm(UserCreationForm):
+    tnc = forms.BooleanField(
+        required = True,
+        label='',
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        error_messages={'required': 'Please accept the terms and conditions.'}
+    )
+
+
     class Meta:
         model = User
         # Fields needed for registration
-        fields = ['username', 'first_name', 'last_name', 'password1','password1']
+        fields = ['username', 'first_name', 'last_name', 'password1','password2', 'tnc']
 
     # Implementation to modify some of the attributes of the fields to use email authentication instead of username
+    def clean_tnc(self):
+        tnc = self.cleaned_data.get('tnc')
+        if not tnc:
+            raise forms.ValidationError('You must agree to the terms and conditions to register.')
+        return tnc
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -19,6 +33,7 @@ class UserCreationForm(UserCreationForm):
             'type': 'email',  # Change input type here
             'class': 'form-control',  # Optional: add any CSS classes here
         })
+
 
 # A form for the controller user to upload video
 class VideoUploadForm(forms.ModelForm):

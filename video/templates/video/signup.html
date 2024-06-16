@@ -12,6 +12,7 @@
         {% csrf_token %}
         <!-- plug in sign up form from usercreation model  -->
         {% for field in signup %}
+          {% if field.name != 'tnc' %}
           <div class="field-wrapper">
             {{field.label_tag}}
             {{field}}
@@ -19,11 +20,20 @@
               <ul class="errorlist">
                 {% for error in field.errors %}
                   <li>{{error}}</li>
+                  <br>
                 {% endfor %}
               </ul>
             {% endif %}
           </div>
+          {% endif %}
         {% endfor %}
+
+        <br>
+        <div class="form-check">               
+          {{ signup.tnc }} <label for="id_tnc">I agree to the <a href="{% url 'login' %}">Terms and Conditions</a></label>
+        </div>
+    
+        <br>
         <div class="actions">
           <input type="reset" value="Clear" class="reset">
           <input type="submit" value="Sign Up" class="submit">   

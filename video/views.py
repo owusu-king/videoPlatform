@@ -25,7 +25,7 @@ from .forms import ShareLinkForm
 
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
-
+from django.contrib import messages
 message = ''
 
 
@@ -194,9 +194,10 @@ def login_view(request):
                 return HttpResponseRedirect(reverse('first'))
         else:
             if User.objects.filter(username=username).exists():
-                message = "Incorrect password, Please try again or reset."
+                messages.error(request, 'Invalid password')
+                message = "Incorrect password, try again"
             else:
-                message = "No user with this email exist. You can signup with us."
+                message = "No user with this email exist."
             return render(request, 'video/login.html', {'message':message}) # If authentication, fails, display login page again, with error message
 
     return render(request, 'video/login.html') # Defaut request method is GET, so, provide a new login form
