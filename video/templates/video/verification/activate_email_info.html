@@ -9,9 +9,9 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
             color: #333;
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
             border: 2px solid #12693d;
             border-radius: 10px;
             background-color: rgb(226, 226, 226);
@@ -38,15 +38,18 @@
             text-align: center;
             margin-top: 20px;
         }
+
+        p {
+            font-size: 15px;
+        }
     </style>
 </head>
 <body>
     <div class="email-container">
         <div class="email-header">
-            <h1>Account Verification</h1>
+            <h1>Dear {{ user.first_name }},</h1>
         </div>
         <div class="email-body">
-            <p>Dear {{ user.first_name }},</p>
             <p>Thank you for joining us. for the last step, click on the following link or copy the link and paste in in a browser to complete your registration:</p>
             <pre class="verification-link">http://{{ domain }}{% url 'activate' uidb64=uid token=token %}</pre>
             <p>Please note that this link is valid for 10 minutes.</p>
