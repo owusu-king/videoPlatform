@@ -1,5 +1,6 @@
 
 {% extends 'video/layout.html' %}
+{% load static %}
 
 {% block title %} 
   Invalid Activation | Video Platform
@@ -7,6 +8,9 @@
 
 {% block main %}
 <div class="no-videos">
+    <div>
+      <img src="{% static 'video/images/error.png' %}" alt="Error" width="200px">
+    </div>
         <h2>Invalid Activation</h2>
         <p>Activation link is invalid!</p>
 </div>  

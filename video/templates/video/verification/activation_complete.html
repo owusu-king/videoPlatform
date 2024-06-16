@@ -1,5 +1,6 @@
 
 {% extends 'video/layout.html' %}
+{% load static %}
 
 {% block title %} 
   Activation Success | Video Platform
@@ -7,6 +8,9 @@
 
 {% block main %}
 <div class="no-videos">
+  <div>
+    <img src="{% static 'video/images/success.png' %}" alt="Error" width="200px">
+  </div>
     <h2>Activation Successful</h2>
     <p>Thank you for registering. Please head back to the login page and access your account.</p>
 </div>  

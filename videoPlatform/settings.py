@@ -38,7 +38,7 @@ EMAIL_HOST_PASSWORD = 'upye myyf fcqn plks'
 DEFAULT_FROM_EMAIL = 'webmaster@gmail.com'
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 

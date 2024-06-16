@@ -14,6 +14,8 @@ body {
 #header {
     background-color:  #1c2941;
     align-items: center;
+    position: sticky;
+    top: 0;
     padding: 10px 40px;
     height: 70px;
     display: flex;
@@ -38,7 +40,8 @@ body {
 
 
 .username{
-    color: white;
+    font-size: 16px;
+    color: #ccc;
     cursor: pointer;
     padding-right: 50px;
 }
@@ -55,8 +58,10 @@ body {
 }
 
 .logout-menu:hover {
-    color: #37171b;
-    transition: 1s;
+    color: #ccc;
+    transition: 0.5s;
+    border: 1px solid red;
+    padding: 5px;
 }
 
 .login-menu:hover {
@@ -77,7 +82,7 @@ body {
     font-size: 20px; 
     text-align: center; 
     margin-bottom: 50px;
-    color: #722F37;
+    color: #0c2044;
 }
 
 form, form input, textarea {
@@ -297,8 +302,7 @@ p {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    color: white;
-    padding-top: 100px;
+    color: #ccc;
 }
 
 .reset-done h2, .no-videos h2, .verification h2 {
@@ -368,6 +372,7 @@ thead {
 
 th{
     padding: 10px 0;
+    color: #0c2044;
 }
 
 td {
@@ -385,6 +390,7 @@ td {
 }
 
 .icon-bar {
+    z-index: 999;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -427,6 +433,7 @@ td {
 
   .account {
     text-align: center;
+    font-size: 15px;
   }
 
 .video-actions .delete:hover {

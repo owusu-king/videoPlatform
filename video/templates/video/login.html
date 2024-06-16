@@ -1,4 +1,5 @@
 {% extends 'video/layout.html' %}
+{% load static %}
 
 {% block title %} 
   Login | Video Platform
@@ -7,24 +8,27 @@
 {% block main %}
 
   <!-- FORM CONTAINER  -->
-  <div class="form-container">
-    <h1>Log In</h1>
-    <form action="{% url 'login' %}" method="POST">
-        {% csrf_token %}
-        Email Address: <input type="email" name="username">
-        Password: <input type="password" name="password">
 
-        <!-- Display error message if POST request fails -->
-        {% if message %}
-        <p class="error">{{message}}</p>
-        {% endif %}
-        <div class="actions">  
-          <input type="submit" value="Sign In" class="submit">   
-        </div>        
-    </form>
-    <p class="account">Forgot Password?  <a href="{% url 'password_reset'%}">Reset Here</a></p> 
-  </div>
+     
+      <div class="form-container">
+        <h1>Log In</h1>
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            Email Address: <input type="email" name="username">
+            Password: <input type="password" name="password">
 
-  <p class="account">Don't have an Account?  <a href="{% url 'signup' %}">Sign Up</a></p>
+            <!-- Display error message if POST request fails -->
+            {% if message %}
+            <p class="error">{{message}}</p>
+            {% endif %}
+            <div class="actions">  
+              <input type="submit" value="Sign In" class="submit">   
+            </div>        
+        </form>
+        <p class="account">Forgot Password?  <a href="{% url 'password_reset'%}">Reset Here</a></p> 
+      </div>
+      <p class="account">Don't have an Account?  <a href="{% url 'signup' %}">Sign Up</a></p>
+    
+
   <!-- END OF FORM CONTAINER  -->
 {% endblock %}

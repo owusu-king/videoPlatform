@@ -120,6 +120,8 @@ def signup_view(request):
             user.is_active = False # Set user inactive and save the record
             form.save()
 
+
+            
             # do verification
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))

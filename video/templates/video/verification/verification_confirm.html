@@ -1,6 +1,7 @@
 
 
 {% extends 'video/layout.html' %}
+{% load static %}
 
 {% block title %} 
   Confirm Verification | Video Platform
@@ -9,6 +10,9 @@
 
 {% block main %}
 <div class="no-videos">
+    <div>
+      <img src="{% static 'video/images/success.png' %}" alt="Error" width="200px">
+    </div>
         <h2>Check your email</h2>
         <p>Thank you for registering. Please check your email to confirm your registration.</p>
 </div>  
