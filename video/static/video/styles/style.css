@@ -208,7 +208,8 @@ p {
 .video-container video { 
     width: 600px;
     border-radius: 10px;
-    border-color: none;
+    padding: 20px;
+    border: 1px solid #0c2044;
 
     /* position: fixed; */
     
@@ -217,8 +218,8 @@ p {
     background: #0c2044;
     border: 1px solid #0c2044;
     padding: 10px 15px;
-    margin: 20px;
-    color: white;
+    margin: 0 100px;
+    color: #ccc;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -234,15 +235,7 @@ p {
 .nav-btn:hover {
     background: #ccc;
     transition: 1s;
-    padding: 10px 15px;
-    margin: 20px;
     color: #0c2044;
-    border: 1px solid #0c2044;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50px;
-    height: 40px;
 }
 
 .nav-btn-inactive{
@@ -261,7 +254,7 @@ p {
 }
 
 .share-button {
-    background-color: #ccc;
+    background-color: white;
     color: #0c2044;
     padding: 12px;
     border-radius: 5px;
@@ -277,10 +270,7 @@ p {
     color: #ccc;
     background-color: #0c2044;
     transition: 1s;
-    padding: 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
+
 }
 
 .video-text h3 {
