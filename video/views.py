@@ -35,45 +35,11 @@ from django.db.models.functions import Substr, Concat
 
 
 
-@require_POST
-def share_link(request):
-    form = ShareLinkForm(request.POST)
-    if form.is_valid():
-        recipient_email = form.cleaned_data['recipient_email']
-        message = form.cleaned_data['message']
-        page_url = request.POST.get('page_url')  # Get the page URL from the form data
-        subject = 'Check out this page'
-        message = f"\n{message}\n\n"
-        from_email = request.user.username
-        rec_uname = recipient_email[:recipient_email.index('@')]
-        context = {
-            'page_url': page_url,
-            'message': message,
-            'name': rec_uname,
-        }
+# VIDEO PAGE
 
-        try:
-            html_content = render_to_string('video/share_email.html', context )
-            text_content = strip_tags(html_content)
-
-            msg = EmailMultiAlternatives(subject, text_content, from_email, [recipient_email])
-            msg.attach_alternative(html_content, "text/html")
-            msg.send()
-            return JsonResponse({'success': True, 'message': 'Link successfully shared!'})
-        except Exception as e:
-            return JsonResponse({'success': False, 'message': f'Error sending email: {e}'})
-    else:
-        return JsonResponse({'success': False, 'message': 'Invalid form data'})
-
-
-
-
-
-
-# AUTHENTICATED USER VIEWS FOR ADMINISTRATOR AND NORMAL USERS
-# Get the first video in the database to handle exceptions if no video is uploaded
+# Checking if there is a video in the database so that the index page wouldn't miss a video id, that will be horrible.
 def first_video(request):
-    if not request.user.is_authenticated: # Non logged in users to be denied access to the video page
+    if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('login'))
     else:
         if request.user.groups.filter(name='Controller').exists():
@@ -340,3 +306,38 @@ def password_reset_complete(request):
         else:
             return HttpResponseRedirect(reverse('first'))
     return render(request, 'video/reset_password/password_reset_complete.html')
+
+
+# SHARE VIDEO VIEW
+
+@require_POST # Only POST request can trigger this method.
+def share_link(request):
+    form = ShareLinkForm(request.POST)
+    if form.is_valid():
+        # Get request details and use the information to send the reset link
+        recipient_email = form.cleaned_data['recipient_email']
+        message = form.cleaned_data['message']
+        page_url = request.POST.get('page_url')  # Get the page URL from the form data
+        subject = 'Check out this page'
+        message = f"\n{message}\n\n"
+        from_email = request.user.username
+        rec_uname = recipient_email[:recipient_email.index('@')]
+        context = {
+            'page_url': page_url,
+            'message': message,
+            'name': rec_uname,
+        }
+
+        try:
+            # Try HTML styled format email
+            html_content = render_to_string('video/share_email.html', context )
+            text_content = strip_tags(html_content)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [recipient_email])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            return JsonResponse({'success': True, 'message': 'Link successfully shared!'})
+        except Exception as e:
+            return JsonResponse({'success': False, 'message': f'Error sending email: {e}'})
+    else: # If form is not valid, Just an alert of invalid data.
+        return JsonResponse({'success': False, 'message': 'Invalid form data'})
+

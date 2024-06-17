@@ -55,10 +55,13 @@ body {
 .logout-menu, .login-menu {
     color: #757575;
     cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 5px;
 }
 
 .logout-menu:hover {
     color: #ccc;
+    background-color: #37171b;
     transition: 0.5s;
     border: 1px solid #ccc;
     padding: 5px;
@@ -455,7 +458,7 @@ td {
 
 
 
-
+ 
 
 
 

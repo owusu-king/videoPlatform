@@ -1,0 +1,175 @@
+
+
+#header {
+background-color:  #1c2941;
+align-items: center;
+position: sticky;
+top: 0;
+padding: 10px 40px;
+height: 70px;
+align-items: center;
+justify-content: space-between;
+}
+
+#header:hover {
+background-color:  #1c2638;
+align-items: center;
+transition: 1s;
+padding: 10px 40px;
+height: 70px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.logo {
+width: 100px;
+}
+
+
+.username{
+font-size: 14px;
+color: #ccc;
+cursor: pointer;
+padding-right: 15px;
+}
+
+.username:hover{
+color: #757575;
+transition: 1s;
+}
+
+
+.logout-menu, .login-menu {
+color: #757575;
+cursor: pointer;
+border: 1px solid #ccc;
+padding: 5px;
+}
+
+.logout-menu:hover {
+color: #ccc;
+background-color: #37171b;
+transition: 0.5s;
+border: 1px solid #ccc;
+
+}
+
+.login-menu:hover {
+color: white;
+transition: 1s;
+}
+
+
+
+
+.video-container {
+    display: grid;
+    margin-top: 50px;
+    /* grid-template-columns: 1fr; */
+    grid-template-areas: 
+    'video video'
+    'left right';
+}
+
+
+
+.video-container video { 
+    grid-area: video;
+    width: 90%;
+    margin: auto;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+
+    /* position: fixed; */
+    
+}
+.nav-btn, .nav-btn-inactive {
+    background: #0c2044;
+    border: 1px solid #0c2044;
+    margin: 10px auto;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    height: 40px;
+}
+
+.nav-btn-inactive .fa {
+    color: #ccc;
+
+}
+
+.nav-btn:hover {
+    background: #ccc;
+    transition: 1s;
+    color: #0c2044;
+}
+
+.nav-btn-inactive{
+    background: #ccc;
+    border: none;
+}
+
+
+.video-text {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+
+}
+
+
+.video-text h3 {
+    color: #0c2044;
+    font-size: 24px;
+    text-align: center;
+}
+
+.video-text p {
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.share-button {
+    background-color: #0c2044;
+    color: #ccc;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #0c2044;
+    outline: none;
+    cursor: pointer;
+    width: 50%;
+    margin-left: 120px;
+    text-align: center;
+}
+
+.share-button:hover {
+    color: #0c2044;
+    background-color: #ccc;
+    transition: 1s;
+
+}
+
+form .share-button {
+    background-color: #440c35;
+    color: #ccc;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #0c2044;
+    outline: none;
+    cursor: pointer;
+    width: 50%;
+    margin-left: 80px;
+    text-align: center;
+}
+
+
+
+
+
