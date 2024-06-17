@@ -59,18 +59,6 @@
 
     <script>
         $(document).ready(function() {
-            // Show the pop-up
-            $('#share-button').on('click', function() {
-                $('#popup-overlay').show();
-                $('#share-popup').show();
-            });
-
-            // Hide the pop-up
-            $('#popup-overlay').on('click', function() {
-                $('#popup-overlay').hide();
-                $('#share-popup').hide();
-            });
-
             // Handle form submission
             $('#share-form').on('submit', function(event) {
                 event.preventDefault();

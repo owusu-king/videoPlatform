@@ -62,61 +62,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Video Upload</title>
-    <script>
-
-        function getCSRFToken() {
-                var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-                return csrfToken;
-            }
-
-        function uploadFile() {
-            var formData = new FormData();
-            var file = document.getElementById("id_video_file").files[0];
-            formData.append("id_video_file", file);
-
-            var xhr = new XMLHttpRequest();
-            
-            xhr.open("POST", "", true);
-            xhr.setRequestHeader("X-CSRFToken", getCSRFToken());
-            xhr.upload.onprogress = function(event) {
-                if (event.lengthComputable) {
-                    var percentComplete = (event.loaded / event.total) * 100;
-                    var progressBar = document.getElementById("progress");
-                    var progressContainer = document.getElementById("progress-container");
-
-                    progressContainer.style.display = "flex";  // Show progress bar
-                    progressContainer.style.zIndex = '5'
-                    progressContainer.style.position = "fixed"
-                    progressBar.style.width = percentComplete + "%";
-                    progressBar.innerHTML = Math.round(percentComplete) + "%";
-                }
-            };
-
-            xhr.onload = function() {
-                document.getElementById("progress-container").style.display = "none"; // Hide progress bar after completion
-            };
-
-            xhr.send(formData);
-        }
-    </script>
-    <style>
-        #progress-container {
-            width: 80%;
-            background-color: #f3f3f3;
-            margin: 20px auto;
-            margin: 10px;
-            display: none; /* Hide by default */
-        }
-        #progress {
-            width: 0;
-            height: 30px;
-            background-color: #0c2044;
-            box-sizing: border-box;
-            text-align: center;
-            line-height: 30px;
-            color: white;
-        }
-    </style>
 </head>
 {% endblock %}
 

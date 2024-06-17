@@ -455,18 +455,38 @@ td {
     grid-template-columns: 0.1fr 1fr;
  }
 
+ .error-page h1 {
+    text-align: center;
+    font-size: 100px;
+    color: rgb(9, 28, 67)
+}
 
+.error-page h3, .error-page p  {
+    text-align: center;
+}
 
+.error-page {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
 
- 
+#progress-container {
+    width: 80%;
+    background-color: #f3f3f3;
+    margin: 20px auto;
+    margin: 10px;
+    display: none; /* Hide by default */
+}
 
-
-
-
-
-
-
-
-
-
-
+#progress {
+    width: 0;
+    height: 30px;
+    background-color: #0c2044;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}
