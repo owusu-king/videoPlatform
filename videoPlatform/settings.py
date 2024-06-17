@@ -89,6 +89,25 @@ WSGI_APPLICATION = 'videoPlatform.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# import pymysql
+# pymysql.install_as_MySQLdb()
+
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',  # MySQL database engine
+#         'NAME': 'video',                        # Name of the database you created
+#         'USER': 'root',                      # Your database username
+#         'PASSWORD': '1234',              # Your database password
+#         'HOST': 'localhost',                   # Set to empty string for localhost
+#         'PORT': '3306',                        # Default port for MySQL
+#         # 'OPTIONS': {
+#         #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",  # Optional for strict mode
+#         # }
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

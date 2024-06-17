@@ -37,5 +37,12 @@ class Command(BaseCommand):
             cursor.execute(f"DELETE FROM sqlite_sequence WHERE name='{Video._meta.db_table}';")
         self.stdout.write(self.style.SUCCESS('Reset primary key sequence for Video model'))
 
+    #     # For mySQL
+    #     with connection.cursor() as cursor:
+    # # Reset the auto-increment value for the primary key
+    #         cursor.execute(f"ALTER TABLE `{Video._meta.db_table}` AUTO_INCREMENT = 1;")
+
+print("Reset primary key sequence for Video model")
+
 
 
