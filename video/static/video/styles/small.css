@@ -23,21 +23,14 @@ justify-content: space-between;
 }
 
 .logo {
-width: 100px;
+width: 150px;
 }
 
 
-.username{
-font-size: 14px;
-color: #ccc;
-cursor: pointer;
-padding-right: 15px;
+.username {
+display: none;
 }
 
-.username:hover{
-color: #757575;
-transition: 1s;
-}
 
 
 .logout-menu, .login-menu {
@@ -167,6 +160,96 @@ form .share-button {
     width: 50%;
     margin-left: 80px;
     text-align: center;
+}
+
+.admin-main {
+    margin: 0 auto;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    'form-container' 
+    'feed';
+    padding-left: 20px;
+    padding-right: 20px;
+    grid-gap: 50px;
+}
+
+.feed {
+    grid-area: feed;
+    width: 100%;
+}
+
+.upload-video {
+    grid-area: upload-video;
+}
+
+.video-actions .delete:hover {
+    color: #37171b;
+    background-color: #ccc;
+    transition: 0.5s;
+ }
+
+ .video-actions .edit {
+    background-color: #0c2044;
+    
+ }
+
+ .video-actions .edit:hover {
+    background-color: #ccc;
+    color: #0c2044;
+    transition: 0.5s;
+ }
+
+ .table-item {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+}
+
+.delete {
+    background: #722F37;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    border: none;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+.edit {
+    display: block;
+    background: #0c2044;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    border: none;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+.reset-done, .no-videos, .verification {
+    min-width: 100vw;
+    min-height: 100vh;
+    position: fixed;
+    z-index: 1;
+    background-color: #0c2044a5;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: #ccc;
+    padding-top: 50px;
+}
+
+.reset-done h2, .no-videos h2, .verification h2 {
+    font-size: 30px;
+}
+
+.reset-done p, .no-videos p, .verification p {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 
