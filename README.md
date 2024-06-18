@@ -3,6 +3,8 @@ A video platfrom project developed as part of AmaliTech NSS recruitment Process
 
 LeoWatch Video Platform
 =======================
+# Link to the video page
+http://kingowusu.pythonanywhere.com/
 
 Project Overview
 LeoWatch is a custom video hosting platform developed using Django for Paul Leonard, a video creator who requires a personalized video platform to showcase his work. The platform allows seamless video uploads, management, and viewing, all while maintaining a strong brand presence.
