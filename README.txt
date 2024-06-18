@@ -1,87 +1,84 @@
 
-**LeoWatch Video Platform**
-A video platfrom project developed as part of AmaliTech’s NSS recruitment Process
-
-Deployment Link, Deployed on pythonanywhere
+LeoWatch Video Platform
 http://kingowusu.pythonanywhere.com/
+===================================================
+Overview
+LeoWatch is a custom video hosting platform developed using Django for Paul Leonard, a video creator who requires a personalized video platform to showcase his work. The platform allows seamless video uploads, sharing, management, and viewing, all while maintaining a strong brand presence.
 
-=====================================================================
-** Overview**
-LeoWatch is a custom video hosting platform developed using Django for Paul Leonard, a video creator who requires a personalized video platform to showcase his work. The platform allows seamless video uploads, management, and viewing, all while maintaining a strong brand presence.
-***TABLE OF CONTENTS***
+TABLE OF CONTENTS
 =====================
-*Features*
+Features
 •	User Features
 •	Admin Features
 •	Video Page Features
-*Installation*
+Installation
 •	Prerequisites
 •	Clone Repository
 •	Setup Environment
 •	Run the Application
-*Usage*
+Signup & Login
 •	Signup & Login
 •	Navigating Videos
 •	Sharing Videos
-*Development*
+Development
 •	Folder Structure
 •	Contribution Guidelines
-*License*
-*Contact*
+License
+Contact
 
 
-***MAIN CONTENTS***
-========================================================================
-**Features**
-    **User Features**
-    *Signup & Login*
+MAIN CONTENTS
+==========================================================
+Features
+    User Features
+    Signup & Login
 •	Users can create an account using an email and password.
 •	Account verification via email.
 •	Password recovery through email.
-   *Video Navigation*
+   Video Navigation
 •	Users can navigate through video pages easily.
-    *Video Sharing*
+    Video Sharing
 •	Users can share links via email to videos on different pages.
 
-    **Controller Features**
-    *Video Upload*
+    Controller Features
+    Video Upload
 •	Admins can upload videos with a title and description.
 •	Admins can edit the title and description of an uploaded video
 •	Admins can delete videos and this will delete the file on disk, not only in the database.
 
-   **Video Page Features**
-    *Single Video Display*
+   Video Page Features
+    Single Video Display
 •	Each video page presents one video.
 •	Previous and next buttons to navigate through videos.
 •	Buttons are hidden if no further videos are available in that direction.
-    *Video Controls*
+    Video Controls
 •	There is a video title and description under the video
 •	Basic video controls such as play, pause, volume, etc.
 
-    **Branding**
+    Branding
 •	Business logo prominently displayed at the top-left of all pages.
 •	I just made up the logo so it is not an actual representation of a reality.
 
-    **Sharing**
+    Sharing
 •	Share button to share the link to the video page.
 •	You don't have to explicitly type the URL. 
 •	Add the recipient email, and optional message and we handle the rest.
 
-    **Installation**
-    *Prerequisites*
+  Installation
+    Prerequisites
 •	Python (v3.8 or later)
 •	Django (v3.2 or later)
 
-    *Clone Git Repository8
+    Clone Git Repository
 •	git clone https://github.com/owusu-king/videoPlatform.git
 •	cd videoPlatform
 
-    *Setup your Environment*
+    Setup your Environment
 •	python -m venv venv
 •	source venv/bin/activate # On Windows use `venv\Scripts\activate`
 •	pip install -r requirements.txt
             
-    *Running the Application*
+    Running the Application
 •	In the main project folder, run 'python manage.py makemigrations'
 •	Run 'python manage.py migrate' to create your database schema
 •	Optionally Run 'python manage.py createsuperuser' to create an admin user
@@ -89,13 +86,14 @@ LeoWatch is a custom video hosting platform developed using Django for Paul Leon
 •	Go to the groups model and create a new group with the name 'Controller'
 •	Assign the superuser to the 'Controller' group to grant them access to admin page.
 
-    **Database Options**    
+    Database Options  
 •	Comment out the MySQL db backend if SQLite is being used
 •	MySQL for Production. Comment out the SQLite database if MySQL is being used
+ 
 
 
 
-    **Folder Structure**
+    Folder Structure
 
 ├── videoPlatform/               # Main Django project directory
 │   ├── settings.py              # Django settings
@@ -158,10 +156,10 @@ LeoWatch is a custom video hosting platform developed using Django for Paul Leon
     │   │   ├── __init__.py
     	
 
-**License**
+License
 •	This project is licensed under the FSD License. See the LICENSE file for more details.
 
-**Contact**
+Contact
 •	For any questions or inquiries, please contact King Owusu at owusuking401@gmail.com. 
 •	I am also available on WhatsApp with +233 247 02 2382 
 
