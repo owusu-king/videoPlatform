@@ -1,14 +1,15 @@
-{% extends 'video/layout.html' %}
-<!-- 404 error page -->
-        {% block main %}
-        <div class="error-page">
-            <h1>404</h1>
-            <h3>Oops! This Page Cannot be found</h3>
-            <p>Please head over to our <a href="{% url 'index' %}"> Home Page </a> and check more exiting contents!</p>
-        </div>
-        {% endblock %}
-    </main>
-    <!-- END OF MAIN CONTENT  -->
+{%extends 'video/layout.html' %}
+{% block title %}
+    404 | Video Platform
+{% endblock %}
 
-    <!-- Make a popup form to help share functionality -->
-     
+{% block main %}
+<div class="error-page">
+<h1 style="font-size: 150px; color: darkred;">404</h1>
+<h3 style="font-size: 40px">Oops! This page cannot be found!</h3>
+<p style="font-size: 20px; padding: 30px;">Please head over to our <a href="{% url 'login' %}">Home Page</a> And enjoy exciting contents!</p>
+</div>
+
+{% endblock %}
+
+

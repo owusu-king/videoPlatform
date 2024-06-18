@@ -38,7 +38,7 @@ EMAIL_HOST_PASSWORD = 'upye myyf fcqn plks'
 DEFAULT_FROM_EMAIL = 'webmaster@gmail.com'
 
 
-ALLOWED_HOSTS = ['*']
+
 
 
 
@@ -86,25 +86,27 @@ TEMPLATES = [
 WSGI_APPLICATION = 'videoPlatform.wsgi.application'
 
 
+# ALLOWED_HOSTS = ['kingOwusu.pythonanywhere.com']
+# DEBUG = False
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+# For production
 # import pymysql
 # pymysql.install_as_MySQLdb()
-
-
 
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',  # MySQL database engine
-#         'NAME': 'video',                        # Name of the database you created
-#         'USER': 'root',                      # Your database username
-#         'PASSWORD': '1234',              # Your database password
-#         'HOST': 'localhost',                   # Set to empty string for localhost
+#         'NAME': 'kingOwusu$video',
+#         'USER': 'kingOwusu',
+#         'PASSWORD': 'xAgQhbHFzIO98qv9SMTn',
+#         'HOST': 'kingOwusu.mysql.pythonanywhere-services.com',
 #         'PORT': '3306',                        # Default port for MySQL
-#         # 'OPTIONS': {
-#         #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",  # Optional for strict mode
-#         # }
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",  # Optional for strict mode
+#         }
 #     }
 # }
 
@@ -151,17 +153,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 
-
-
-
-if DEBUG:
-    STATIC_FILES_DIRS = os.path.join(BASE_DIR, 'static/')
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 
 PASSWORD_RESET_TIMEOUT = 600 

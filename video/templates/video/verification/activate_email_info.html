@@ -50,7 +50,7 @@
             <h1>Dear {{ user.first_name }},</h1>
         </div>
         <div class="email-body">
-            <p>Thank you for joining us. for the last step, click on the following link or copy the link and paste in in a browser to complete your registration:</p>
+            <p>Thank you for joining us. for the last step, click on the link below or copy the link and paste in in a browser to complete your registration:</p>
             <pre class="verification-link">http://{{ domain }}{% url 'activate' uidb64=uid token=token %}</pre>
             <p>Please note that this link is valid for 10 minutes.</p>
         </div>
